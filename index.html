@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sync-Test">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="app.css">
+<title>Sync-Test</title>
+</head>
+<body>
+<header>
+  <h1>Dropbox-Sync-Test</h1>
+  <span id="status" class="pille">…</span>
+</header>
+
+<main>
+  <section id="abgemeldet" hidden>
+    <p>Diese Test-App speichert Einträge in einem eigenen Ordner deiner Dropbox (<code>Apps/…</code>) und gleicht sie zwischen Geräten ab, die mit demselben Dropbox-Konto verbunden sind.</p>
+    <button id="verbinden" class="haupt">Mit Dropbox verbinden</button>
+    <details>
+      <summary>Klappt nicht? Mit Code verbinden</summary>
+      <p>Öffnet Dropbox in Safari. Nach „Erlauben“ zeigt Dropbox einen Code. Den kopieren, zurück in diese App wechseln und hier einfügen.</p>
+      <button id="code-holen">Code bei Dropbox holen</button>
+      <form id="code-form">
+        <input id="code" placeholder="Code einfügen" autocomplete="off">
+        <button>Verbinden</button>
+      </form>
+    </details>
+  </section>
+
+  <section id="angemeldet" hidden>
+    <form id="neu">
+      <input id="text" placeholder="Neuer Eintrag, z. B. „Bäcker 4,20“" autocomplete="off" required>
+      <button>Hinzufügen</button>
+    </form>
+    <ul id="liste"></ul>
+    <p id="leer" class="leise">Noch keine Einträge.</p>
+    <div class="knoepfe">
+      <button id="jetzt">Jetzt abgleichen</button>
+      <button id="trennen" class="leise">Dropbox trennen</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Testprotokoll</h2>
+    <dl id="info"></dl>
+    <ol id="log"></ol>
+  </section>
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

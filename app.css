@@ -1,0 +1,53 @@
+:root {
+  --bg: #f6f7f9; --karte: #fff; --text: #16181d; --leise: #6b7280; --linie: #e5e7eb;
+  --blau: #1d4ed8; --gruen: #15803d; --orange: #c2410c; --rot: #b91c1c;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111317; --karte: #1b1e24; --text: #eceef2; --leise: #9aa1ad; --linie: #2b2f37;
+    --blau: #6b8cff; --gruen: #4ade80; --orange: #fb923c; --rot: #f87171;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom));
+}
+header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 0; }
+h1 { font-size: 20px; margin: 0; }
+h2 { font-size: 15px; margin: 28px 0 8px; color: var(--leise); text-transform: uppercase; letter-spacing: .04em; }
+main { max-width: 560px; margin: 0 auto; }
+section > p { margin: 0 0 12px; }
+.pille { font-size: 13px; padding: 3px 10px; border-radius: 99px; background: var(--linie); white-space: nowrap; }
+.pille.ok { background: var(--gruen); color: #fff; }
+.pille.warn { background: var(--orange); color: #fff; }
+.pille.fehler { background: var(--rot); color: #fff; }
+button, input {
+  font: inherit; border-radius: 10px; border: 1px solid var(--linie);
+  padding: 10px 14px; background: var(--karte); color: var(--text);
+}
+button { cursor: pointer; }
+button.haupt { background: var(--blau); color: #fff; border: 0; width: 100%; padding: 14px; font-weight: 600; }
+button.leise { color: var(--leise); }
+form { display: flex; gap: 8px; margin: 10px 0; }
+form input { flex: 1; min-width: 0; }
+details { margin-top: 16px; }
+summary { color: var(--blau); cursor: pointer; }
+ul { list-style: none; padding: 0; margin: 12px 0; }
+li {
+  display: flex; align-items: center; gap: 10px; background: var(--karte);
+  border: 1px solid var(--linie); border-radius: 10px; padding: 10px 12px; margin-bottom: 6px;
+}
+li span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+li small { color: var(--leise); display: block; font-size: 12px; }
+li button { padding: 4px 10px; font-size: 14px; }
+.leise { color: var(--leise); }
+.knoepfe { display: flex; gap: 8px; flex-wrap: wrap; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; font-size: 14px; }
+dt { color: var(--leise); }
+dd { margin: 0; overflow-wrap: anywhere; }
+#log { font-size: 13px; color: var(--leise); padding-left: 20px; margin-top: 12px; }
+#log li { display: list-item; background: none; border: 0; padding: 1px 0; margin: 0; }
