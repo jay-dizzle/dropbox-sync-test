@@ -150,15 +150,17 @@ let laeuft = false, timer = null;
 const syncBald = ms => { clearTimeout(timer); timer = setTimeout(sync, ms); };
 
 async function sync() {
+  // navigator.onLine bleibt auf dem iPhone nach dem Flugmodus manchmal auf false hängen,
+  // deshalb immer selbst versuchen und nur echte Netzfehler als „Offline“ werten.
   if (laeuft || !lies('token', null)) return;
-  if (!navigator.onLine) { status('Offline', 'warn'); return; }
   laeuft = true; status('Gleicht ab …');
   try {
     const eigeneDatei = `/g-${geraet.id}.json`;
     if (ungesendet) {
+      const anzahl = eigene.length;
       await hochladen(eigeneDatei, JSON.stringify({ geraet: geraet.name, ops: eigene }));
-      ungesendet = false; schreib('ungesendet', false);
-      log(`Hochgeladen (${eigene.length} Änderungen)`);
+      if (eigene.length === anzahl) { ungesendet = false; schreib('ungesendet', false); }
+      log(`Hochgeladen (${anzahl} Änderungen)`);
     }
     let liste = await api('/files/list_folder', { path: '' });
     const dateien = [...liste.entries];
@@ -177,8 +179,15 @@ async function sync() {
     status('Synchron', 'ok');
     zeigeListe();
   } catch (e) {
-    status('Fehler', 'fehler');
-    log(`Fehler: ${e.message}`);
+    if (e instanceof TypeError) {
+      // fetch scheitert ohne Netz mit TypeError; leise erneut versuchen
+      if ($('status').textContent !== 'Offline') log(`Kein Netz${ungesendet ? ', Änderungen warten' : ''}`);
+      status('Offline', 'warn');
+      syncBald(15_000);
+    } else {
+      status('Fehler', 'fehler');
+      log(`Fehler: ${e.message}`);
+    }
   } finally {
     laeuft = false;
     zeigeInfo();
