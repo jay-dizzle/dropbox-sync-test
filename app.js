@@ -2,7 +2,7 @@
 // Jedes Gerät schreibt seine Änderungen in eine eigene Datei im App-Ordner
 // (g-<gerät>.json) und liest die Dateien der anderen Geräte.
 
-const APP_KEY = 'APP_KEY_EINTRAGEN';
+const APP_KEY = 'r24kfqe4tprgsc3';
 const RUECKSPRUNG = new URL('./', location.href).href;
 const AUTH = 'https://www.dropbox.com/oauth2/authorize';
 const TOKEN = 'https://api.dropboxapi.com/oauth2/token';

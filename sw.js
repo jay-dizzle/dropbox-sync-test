@@ -1,5 +1,5 @@
 // App-Hülle offline verfügbar machen; Dropbox-Aufrufe gehen immer ins Netz.
-const VERSION = 'sync-test-v1';
+const VERSION = 'sync-test-v2';
 const DATEIEN = ['./', 'index.html', 'app.css', 'app.js', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
